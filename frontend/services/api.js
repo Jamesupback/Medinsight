@@ -1,8 +1,9 @@
 import axios from "axios";
+const ip='localhost'
 const handleSubmit = async (data) => {
     console.log(data)
     try {
-        const response = await axios.post("http://localhost:5000/api/nonstream", { data});
+        const response = await axios.post(`http://${ip}:5000/api/nonstream`, { data});
         const responseData = response.data.response;
         const summary = responseData.substring(
             responseData.indexOf("Summary") + "Summary".length,
@@ -49,15 +50,14 @@ const handleSubmit = async (data) => {
     }
 };
 
-const handleChat= async (data) => {
+const handleChatReq= async (data) => {
     try {
-        const response = await axios.post("http://192.168.1.38:5000/api/chat", { data });
-        console.log(response.data.response); // Log the response
+        const response = await axios.post(`http://${ip}:5000/api/chat`, { data });
         return response.data.response; // Ensure this matches your API response structure
     } catch (error) {
         console.error("Error during API call:", error);
     }
 };
   
-  export { handleSubmit,handleChat };
+  export { handleSubmit,handleChatReq };
   

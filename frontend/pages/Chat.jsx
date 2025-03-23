@@ -14,6 +14,7 @@ import Animalogerror from "../components/Animalogerror";
 import Erroralert from "../components/Erroralert";
 import Greentoast from "../components/Greentoast";
 import AuthToast from "../components/Authtoast";
+import { handleChatReq } from "../services/api";
 
 const Chat = () => {
   const user = useUser();
@@ -33,10 +34,8 @@ const Chat = () => {
     setIsloading(true);
 
     try {
-      const response = await axios.post("http://192.168.1.38:5000/api/chat", {
-        data,
-      });
-      const newOutput = marked(response.data.response); // Ensure this matches your API response structure
+      const response = await handleChatReq(data);
+      const newOutput = marked(response); // Ensure this matches your API response structure
 
       // Add the new response to the list
       setResponses((prev) => [

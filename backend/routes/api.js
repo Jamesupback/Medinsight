@@ -31,7 +31,7 @@ router.post('/nonstream', async(req, res) => {
 router.post('/chat', async (req, res) => {
 
     const data= req.body.data;
-    
+
     const message = { role: 'user', content: data };
     const response = await ollama.chat({ model: 'llama3.2', messages: [message] })
     console.log(response.message.content)

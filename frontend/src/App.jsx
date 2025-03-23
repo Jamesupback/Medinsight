@@ -14,6 +14,7 @@ const App = () => (
       <Route path='/chat' element={<Chat />} />
       <Route path='/login' element={<Login/>} />
       <Route path='/register' element={<Register/>} />
+      <Route path='/upload' element={<Upload/>} />
     </Routes>
   </Router>
 );
