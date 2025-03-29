@@ -40,6 +40,9 @@ const chatclicked = (action) => {
     } else if (action === "chat") {
       navigate("/chat");
     }
+    else if (action === "live") {
+      navigate("/upload");
+    }
   }
 };
   // console.log(user)
@@ -84,7 +87,8 @@ const chatclicked = (action) => {
           </div>
           <div className="navbar-center hidden lg:flex ">
             <ul className="menu menu-horizontal space-x-24 text-base">
-            <li><a onClick={() => chatclicked("analyze")}>Analyze</a></li>
+            <li><a onClick={() => chatclicked("analyze")}>Trend Analysis</a></li>
+            <li><a onClick={()=>chatclicked('live')}>Live Analysis</a></li>
             <li><a onClick={() => chatclicked("chat")}>Chat</a></li>
               <li><a>About us</a></li>
             </ul>

@@ -5,6 +5,7 @@ import Api from '../pages/Api';
 import Chat from '../pages/Chat';
 import Login from '../pages/login';
 import Register from '../pages/Register';
+import Upload from '../pages/Upload';
 
 const App = () => (
   <Router>

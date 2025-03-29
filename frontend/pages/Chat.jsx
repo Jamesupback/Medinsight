@@ -59,7 +59,7 @@ const Chat = () => {
 
   return (
     <>
-      <Greentoast message={"Successfully logged in! 🎉"} />
+      {/* <Greentoast message={"Successfully logged in! 🎉"} /> */}
       <SignedIn>
         <>
           <Navbar fixed={true} />
