@@ -6,6 +6,7 @@ import Chat from '../pages/Chat';
 import Login from '../pages/login';
 import Register from '../pages/Register';
 import Upload from '../pages/Upload';
+import Extract from '../pages/extract';
 
 const App = () => (
   <Router>
@@ -16,6 +17,7 @@ const App = () => (
       <Route path='/login' element={<Login/>} />
       <Route path='/register' element={<Register/>} />
       <Route path='/upload' element={<Upload/>} />
+      <Route path='/extract' element={<Extract/>} />
     </Routes>
   </Router>
 );
