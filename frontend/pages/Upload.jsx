@@ -8,6 +8,7 @@ import Animai from '../components/Animai';
 const FileUpload = () => {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState('');
+  const [showBalloon, setShowBalloon] = useState(false);
 
   // Handle file change event
   const handleFileChange = (e) => {
@@ -22,6 +23,7 @@ const FileUpload = () => {
       return;
     }
 
+    setShowBalloon(true)
     const formData = new FormData();
     formData.append('file', file);
 
@@ -32,6 +34,7 @@ const FileUpload = () => {
         },
       });
       setMessage(response.data.text);
+      setShowBalloon(false);
     } catch (error) {
       setMessage('Error uploading file.');
       console.error(error);
@@ -46,16 +49,19 @@ const FileUpload = () => {
              <input type="file" onChange={handleFileChange} className="file-input" />
              <button className="btn btn-soft btn-accent" type='submit'>upload</button>
             </form>
-            {message ?<p data-theme="cupcake" className="card bg-base-100 shadow-xl py-6 px-6 w-3/4 mb-6" dangerouslySetInnerHTML={({__html:marked(message)})}></p> :(
-              <div className="card bg-transparent  w-96  mt-5" data-theme="sunset" data-aos='zoom-in'>
-                        <figure>
-                            <Animai/>
-                        </figure>
-                        
+            {message && <p data-theme="cupcake" className="card bg-base-100 shadow-xl py-6 px-6 w-3/4 mb-6" dangerouslySetInnerHTML={({__html:marked(message)})}></p>}
+            {showBalloon && (
+              <div className="card bg-transparent w-96 mt-2" data-theme="sunset" data-aos="zoom-in">
+                <figure>
+                  <Animai />
+                </figure>
               </div>
             )}
             </div>
+        <div className='mt-96'>
         <Footer/>
+        </div>
+        
     </>
   );
 };

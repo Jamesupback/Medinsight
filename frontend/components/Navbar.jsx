@@ -36,7 +36,7 @@ const chatclicked = (action) => {
   } else {
     // Redirect based on the action
     if (action === "analyze") {
-      navigate("/api");
+      navigate("/extract");
     } else if (action === "chat") {
       navigate("/chat");
     }
