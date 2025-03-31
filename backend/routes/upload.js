@@ -37,11 +37,33 @@ router.post("/", upload.single("file"), async (req, res) => {
                 Health Insights: <what current values indicate whether it is high or low or normal> \n
                 Recommendations <if applicable>: <general lifestyle recommendations to improve abnormal values.>\n\n
                 ${text}`};
+
+                const jsonmessage = { role: 'user', content: `
+                    Extract the lipid profile test values from the following medical report and return them in JSON format.
+    
+    The JSON should follow this structure:
+    {
+        "totalCholesterol": VALUE,
+        "hdl": VALUE,
+        "ldl": VALUE,
+        "triglycerides": VALUE,
+        "vldl": VALUE,
+        "cholesterolHdlRatio": VALUE,
+        "ldlHdlRatio": VALUE,
+        "date": dd/mm//yyyy,
+    }
+    
+    Ensure that the extracted values are placed in the correct fields. Return only the JSON output, without extra text.
+    
+    Medical Report:
+    
+                    ${text}`};
+        const jsonres = await ollama.chat({ model: 'llama3.2', messages: [jsonmessage] })
         const response = await ollama.chat({ model: 'llama3.2', messages: [message] })
         const result= response.message.content
         console.log(response)
         // Send extracted text as response
-        res.status(200).json({ message: "File uploaded successfully", file: req.file, text: result });
+        res.status(200).json({ message: "File uploaded successfully", file: req.file, text: result, json: jsonres.message.content });
 
         // Delete the file after processing
         fs.unlinkSync(req.file.path);

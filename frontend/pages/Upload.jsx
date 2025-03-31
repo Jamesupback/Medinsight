@@ -4,11 +4,15 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { marked } from 'marked';
 import Animai from '../components/Animai';
+import LipidChart from '../components/LipidChart';
+import { uploadFile } from '../services/api';
 
 const FileUpload = () => {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState('');
   const [showBalloon, setShowBalloon] = useState(false);
+  const [ldata, setLdata] = useState({});
+  const [isLoading, setIsLoading] = useState(false);  // New loading state
 
   // Handle file change event
   const handleFileChange = (e) => {
@@ -23,45 +27,64 @@ const FileUpload = () => {
       return;
     }
 
-    setShowBalloon(true)
+    // Set loading state and show balloon
+    setIsLoading(true);
+    setShowBalloon(true);
     const formData = new FormData();
     formData.append('file', file);
 
     try {
-      const response = await axios.post('http://localhost:5000/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      setMessage(response.data.text);
+      const response = await uploadFile(formData);  // Call the upload function
+      setMessage(response.text);
       setShowBalloon(false);
+      setLdata(response.json);  // Set the received data
     } catch (error) {
-      setMessage('Error uploading file.');
+      setMessage('An error occurred while uploading the file.');
       console.error(error);
+    } finally {
+      setIsLoading(false);  // Hide loading after data is received or error occurs
     }
   };
 
+  const splitIntoBlocks = (message) => {
+    const regex = /\*\*(.*?)\*\*[\s\S]*?(?=\*\*|$)/g;
+    const blocks = [];
+    let match;
+    
+    while ((match = regex.exec(message)) !== null) {
+      blocks.push(match[0]);
+    }
+    
+    return blocks;
+  };
   return (
     <>
-        <Navbar/>    
-            <div className="container mx-auto my-12 justify-center items-center flex flex-col">
-            <form onSubmit={handleSubmit} className='m-10'>
-             <input type="file" onChange={handleFileChange} className="file-input" />
-             <button className="btn btn-soft btn-accent" type='submit'>upload</button>
-            </form>
-            {message && <p data-theme="cupcake" className="card bg-base-100 shadow-xl py-6 px-6 w-3/4 mb-6" dangerouslySetInnerHTML={({__html:marked(message)})}></p>}
-            {showBalloon && (
-              <div className="card bg-transparent w-96 mt-2" data-theme="sunset" data-aos="zoom-in">
-                <figure>
-                  <Animai />
-                </figure>
-              </div>
-            )}
-            </div>
-        <div className='mt-96'>
-        <Footer/>
-        </div>
+      <Navbar />    
+      <div className="container mx-auto my-12 justify-center items-center flex flex-col">
+        <form onSubmit={handleSubmit} className='m-10'>
+          <input type="file" onChange={handleFileChange} className="file-input" />
+          <button className="btn btn-soft btn-accent" type='submit'>Upload</button>
+        </form>
         
+        {/* Show LipidChart only when data is available */}
+        {ldata && Object.keys(ldata).length > 0 && !isLoading && <LipidChart lipidData={ldata} />}
+        
+        {/* Show message if available */}
+        {message && <p data-theme="sunset" className="card bg-base-100 shadow-xl py-6 px-6 w-3/4 mb-6" dangerouslySetInnerHTML={{ __html: marked(message) }}></p>}
+        
+        {/* Show Animai component as a loading animation */}
+        {isLoading && (
+          <div className="card bg-transparent w-96 mt-2" data-theme="autumn" data-aos="zoom-in">
+            <figure>
+              <Animai />
+            </figure>
+          </div>
+        )}
+      </div>
+      
+      <div className='mt-96'>
+        <Footer />
+      </div>
     </>
   );
 };

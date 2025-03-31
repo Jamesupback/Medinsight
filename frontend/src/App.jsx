@@ -7,6 +7,8 @@ import Login from '../pages/login';
 import Register from '../pages/Register';
 import Upload from '../pages/Upload';
 import Extract from '../pages/extract';
+import Visual from '../pages/Visual';
+import Mydata from '../pages/Mydata';
 
 const App = () => (
   <Router>
@@ -18,6 +20,8 @@ const App = () => (
       <Route path='/register' element={<Register/>} />
       <Route path='/upload' element={<Upload/>} />
       <Route path='/extract' element={<Extract/>} />
+      <Route path='/mydata' element={<Mydata/>} />
+      <Route path='/myprofile' element={<Mydata/>} />
     </Routes>
   </Router>
 );

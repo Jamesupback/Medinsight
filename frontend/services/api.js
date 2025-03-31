@@ -28,13 +28,6 @@ const handleSubmit = async (data) => {
         const recommendation = responseData.substring(
             responseData.indexOf("Recommendations") + "Recommendations".length+2
         ).trim();
-        // Additional lines
-        console.log(summary);
-        console.log(riskAssessment);
-        console.log(predictiveAnalysis);
-        console.log(lifestyleSuggestions);
-        console.log(comparativeAnalysis);
-        console.log(recommendation);
         const resultArray = [
             { section: "Summary", content: '**'+summary },
             { section: "Risk Assessment", content: riskAssessment },
@@ -44,7 +37,6 @@ const handleSubmit = async (data) => {
             { section: "Recommendation", content: recommendation }
         ];
         return resultArray;
-        return response.data.response; // Ensure this matches your API response structure
     } catch (error) {
         console.error("Error during API call:", error);
     }
@@ -58,6 +50,37 @@ const handleChatReq= async (data) => {
         console.error("Error during API call:", error);
     }
 };
-  
-  export { handleSubmit,handleChatReq };
+
+const uploadFile = async (formData) => {
+  try {
+    const response = await axios.post(`http://${ip}:5000/upload`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return {
+      text: response.data.text,
+      json: JSON.parse(response.data.json),
+      error: null,
+    };
+  } catch (error) {
+    console.error("Error uploading file:", error);
+    return { text: "Error uploading file.", json: null, error };
+  }
+};
+
+    // Function to fetch lipid profile data from backend
+    const fetchLipidData = async () => {
+        try {
+          const response = await axios.get(`http://${ip}:5000/lipid`);
+            return response.data;
+        } catch (error) {
+          console.error("Error fetching lipid profile data:", error);
+        }
+      };
+
+
+export { handleSubmit, uploadFile, fetchLipidData, handleChatReq };
+
   

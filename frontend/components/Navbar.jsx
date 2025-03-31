@@ -43,6 +43,9 @@ const chatclicked = (action) => {
     else if (action === "live") {
       navigate("/upload");
     }
+    else if (action === "data") {
+      navigate("/mydata");
+    }
   }
 };
   // console.log(user)
@@ -54,7 +57,7 @@ const chatclicked = (action) => {
         <div className="navbar bg-base-100  z-50" data-theme='sunset'
           style={{ position: fixed ? 'fixed' : 'relative' }}>
           <div className="navbar-start">
-            {/* <div className="dropdown">
+            <div className="dropdown">
               <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -72,17 +75,11 @@ const chatclicked = (action) => {
               <ul
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                <li><a>Item 1</a></li>
-                <li>
-                  <a>Parent</a>
-                  <ul className="p-2">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                  </ul>
-                </li>
-                <li><a>Item 3</a></li>
+                <li><a href='/upload'>Live analysis</a></li>
+                <li><a href='/extract'>Trend anlaysis</a></li>
+                <li><a href='/chat'>Chat</a></li>
               </ul>
-            </div> */}
+            </div>
             <a className="btn btn-ghost text-xl" href='/'>MEDINSIGHT</a>
           </div>
           <div className="navbar-center hidden lg:flex ">
@@ -90,7 +87,7 @@ const chatclicked = (action) => {
             <li><a onClick={() => chatclicked("analyze")}>Trend Analysis</a></li>
             <li><a onClick={()=>chatclicked('live')}>Live Analysis</a></li>
             <li><a onClick={() => chatclicked("chat")}>Chat</a></li>
-              <li><a>About us</a></li>
+            <li><a onClick={() => chatclicked("data")}>My data</a></li>
             </ul>
           </div>
           <div className="navbar-end pr-0 sm:pr-5" >

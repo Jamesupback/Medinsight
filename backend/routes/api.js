@@ -7,6 +7,7 @@ let currentMessage = ''; // To store the latest message for streaming
 router.post('/nonstream', async(req, res) => {
     let fullResponse = '';
         const data= req.body.data;
+        console.log(data)
         const message = { role: 'user', content: `data=${data} , You are a medical AI assistant. Analyze the patient's historical medical data provided below and generate a comprehensive report.
          The report should be formatted into the following sections: 
             1. **Summary**: Summarize the key trends in the patient's data, highlighting any significant changes over time. 
@@ -18,7 +19,8 @@ router.post('/nonstream', async(req, res) => {
             ### Guidelines:
             - Use concise, medically accurate language.
             - Do not provide any other sections beyond the ones listed.
-            - Avoid making assumptions beyond the provided data.
+            - use only lipid profile data for the analysis.
+            - Do not make assumptions beyond the provided data.
             - Do not include any introductory or context setting messages or any notes
             ` };
         const response = await ollama.chat({ model: 'llama3.2', messages: [message] })
