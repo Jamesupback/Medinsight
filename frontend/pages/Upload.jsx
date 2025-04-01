@@ -6,6 +6,8 @@ import { marked } from 'marked';
 import Animai from '../components/Animai';
 import LipidChart from '../components/LipidChart';
 import { uploadFile } from '../services/api';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FileUpload = () => {
   const [file, setFile] = useState(null);
@@ -38,6 +40,7 @@ const FileUpload = () => {
       setMessage(response.text);
       setShowBalloon(false);
       setLdata(response.json);  // Set the received data
+      toast.success("File uploaded successfully!", { autoClose: 1000, position: "bottom-right" });
     } catch (error) {
       setMessage('An error occurred while uploading the file.');
       console.error(error);
@@ -60,6 +63,7 @@ const FileUpload = () => {
   return (
     <>
       <Navbar />    
+      <ToastContainer />
       <div className="container mx-auto my-12 justify-center items-center flex flex-col">
         <form onSubmit={handleSubmit} className='m-10'>
           <input type="file" onChange={handleFileChange} className="file-input" />

@@ -1,5 +1,5 @@
 import axios from "axios";
-const ip='localhost'
+const ip='192.168.0.120'
 const handleSubmit = async (data) => {
     console.log(data)
     try {

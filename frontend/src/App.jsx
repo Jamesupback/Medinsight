@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
 import Api from '../pages/Api';
 import Chat from '../pages/Chat';
-import Login from '../pages/login';
+import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Upload from '../pages/Upload';
-import Extract from '../pages/extract';
+import Extract from '../pages/Extract';
 import Visual from '../pages/Visual';
 import Mydata from '../pages/Mydata';
 

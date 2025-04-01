@@ -9,6 +9,7 @@ import AOS from 'aos'
 import Animalogin from '../components/Animalogin'
 
 
+
 const Login = () => {
     useEffect(() => {
         AOS.init({
