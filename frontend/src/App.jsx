@@ -9,7 +9,8 @@ import Upload from '../pages/Upload';
 import Extract from '../pages/Extract';
 import Visual from '../pages/Visual';
 import Mydata from '../pages/Mydata';
-
+import Adminlogin from '../pages/Adminlogin';
+import AdminDashboard from '../pages/AdminDashboard';
 const App = () => (
   <Router>
     <Routes>
@@ -22,6 +23,8 @@ const App = () => (
       <Route path='/extract' element={<Extract/>} />
       <Route path='/mydata' element={<Mydata/>} />
       <Route path='/myprofile' element={<Mydata/>} />
+      <Route path='/adminlogin' element={<Adminlogin/>} />
+      <Route path='/admindashboard' element={<AdminDashboard/>} />
     </Routes>
   </Router>
 );

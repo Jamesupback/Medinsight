@@ -1,7 +1,7 @@
 // src/services/lipidService.js
 import axios from 'axios';
 
-const ip = 'http://192.168.0.120:5000'; // Replace with your desired IP or make it configurable
+const ip = 'http://localhost:5000'; // Replace with your desired IP or make it configurable
 
 // Fetch all lipid data
 export const fetchLipidData = async () => {

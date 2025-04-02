@@ -87,7 +87,8 @@ const chatclicked = (action) => {
             <li><a onClick={() => chatclicked("analyze")}>Trend Analysis</a></li>
             <li><a onClick={()=>chatclicked('live')}>Live Analysis</a></li>
             <li><a onClick={() => chatclicked("chat")}>Chat</a></li>
-            <li><a onClick={() => chatclicked("data")}>My data</a></li>
+            <li><a onClick={() => chatclicked("data")}>My Data</a></li>
+            <li><a href="/adminlogin">Admin</a></li>
             </ul>
           </div>
           <div className="navbar-end pr-0 sm:pr-5" >

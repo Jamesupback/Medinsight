@@ -6,6 +6,12 @@ import uploadRouter from './routes/upload.js';
 import extractRouter from './routes/extract.js';
 import corsMiddleware from './middlewares/cors.js';
 import lipidRouter from './routes/lipidProfile.js';
+import { createClerkClient } from '@clerk/backend'
+import dotenv from 'dotenv';
+dotenv.config();
+
+
+const clerkClient = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY });
 
 const PORT = 5000;
 const HOST = '0.0.0.0';
@@ -27,7 +33,14 @@ app.use('/extract',extractRouter)
 app.use('/lipid', lipidRouter);
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Server is running!');
+}
+);
+
+app.get('/users', async(req, res) => {
+
+    const response = await clerkClient.users.getUserList()
+    return res.status(200).json(response);
 });
 
 app.listen(PORT, HOST, () => {

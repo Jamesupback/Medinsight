@@ -65,7 +65,7 @@ const FileUpload = () => {
       <Navbar />    
       <ToastContainer />
       <div className="container mx-auto my-12 justify-center items-center flex flex-col">
-        <form onSubmit={handleSubmit} className='m-10'>
+        <form onSubmit={handleSubmit} className='m-10 flex'>
           <input type="file" onChange={handleFileChange} className="file-input" />
           <button className="btn btn-soft btn-accent" type='submit'>Upload</button>
         </form>
